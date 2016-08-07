@@ -6,6 +6,6 @@ package com.tianxia.administrator.appdemo;
 public class TestHelloHack {
 
     public String showHello() {
-        return "hello1";
+        return "hello12345";
     }
 }
