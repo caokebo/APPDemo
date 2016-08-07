@@ -1,0 +1,41 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.dodola.rocoofix'
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "com.tianxia.administrator.appdemo"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug{
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+repositories {
+    maven {
+        url  "http://dl.bintray.com/dodola/maven"
+    }
+}
+rocoo_fix {
+    includePackage = ['com/tianxia/administrator/appdemo']//限制需要制作补丁的package
+    excludeClass = ['Applic.class']//将不需要加到patch里的类写在这里
+//    preVersionPath = '1'//注意：此项属性只在需要制作补丁的时候才需开启！！如果不需要制作补丁则需要去掉此项
+    enable = true//注意：关掉此项会无法生成Hash.txt文件
+}
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.4.0'
+    compile project(':rocoo')
+}
